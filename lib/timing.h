@@ -39,8 +39,8 @@ void timing_setup() {
 
 void timing_loop() {
 	ms = millis();
-	t = ms / 16;
 	ms += ((s32)(ms / 1000 / 60) * driftMsPerHour / 60);
+	t = ms / 16;
 
 	currentMinute = ms / 1000 / 60;
 	if (currentMinute != lastMinute) {
