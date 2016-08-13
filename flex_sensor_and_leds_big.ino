@@ -20,6 +20,9 @@ CRGB leds1[NUM_LEDS_PER_STRIP];
 
 template<uint8_t DATA_PIN> class WS2812_STRIP : public WS2812Controller800Khz<DATA_PIN, GRB> {};
 
+// For differentiating effects between boards
+u8 randOffset = 0;
+
 #include "lib/graphics.h"
 #include "lib/init.h"
 #include "lib/timing.h"
@@ -36,6 +39,7 @@ void setup() {
   // More randomness
   random16_add_entropy(analogRead(A0));
   random16_add_entropy(analogRead(A5));
+  randOffset = random8();
 
   timing_setup();
 

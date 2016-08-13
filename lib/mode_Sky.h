@@ -8,10 +8,8 @@ CRGB red    = CRGB(255,   0,   0);
 CRGB yellow = CRGB(200, 150,   0);
 CRGB orange = CRGB(225,  50,   0);
 
-u8 randOffset = 0;
-
 void mode_Sky_setup() {
-	randOffset = random8();
+	// nothing to do
 }
 
 void mode_Sky_loop() {
