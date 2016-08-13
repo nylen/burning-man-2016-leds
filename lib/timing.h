@@ -46,7 +46,9 @@ void timing_loop() {
 
 	currentMinute = ms / 1000 / 60;
 	if (currentMinute != lastMinute) {
-		EEPROM.put(ADDRESS_MINUTES_0, currentMinute);
+		if (currentMinute % 5 == 0) {
+			EEPROM.put(ADDRESS_MINUTES_0, currentMinute);
+		}
 		lastMinute = currentMinute;
 	}
 
