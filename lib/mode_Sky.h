@@ -11,7 +11,6 @@ CRGB orange = CRGB(225,  50,   0);
 u8 randOffset = 0;
 
 void mode_Sky_setup() {
-	// nothing to do
 	randOffset = random8();
 }
 
