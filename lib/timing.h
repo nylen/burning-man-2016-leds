@@ -34,6 +34,8 @@ void timing_setup() {
 	EEPROM.get(ADDRESS_MINUTES_0, lastMinute);
 	EEPROM.put(ADDRESS_MINUTES_1, lastMinute);
 
+	// Reset current
+	EEPROM.put(ADDRESS_MINUTES_0, currentMinute);
 	lastMinute = 0;
 }
 
