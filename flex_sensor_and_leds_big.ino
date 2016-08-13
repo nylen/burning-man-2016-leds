@@ -33,6 +33,10 @@ void setup() {
   FastLED.setBrightness(255);
   Serial.begin(115200);
 
+  // More randomness
+  random16_add_entropy(analogRead(A0));
+  random16_add_entropy(analogRead(A5));
+
   timing_setup();
 
   modes_setup();
@@ -41,10 +45,6 @@ void setup() {
 
   // Short graphics sequence for testing
   init_runSequence();
-
-  // More randomness
-  random16_add_entropy(analogRead(A0));
-  random16_add_entropy(analogRead(A5));
 }
 
 void loop() {
