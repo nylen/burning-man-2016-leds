@@ -1,6 +1,4 @@
-#define MS_PER_MODE_STEP (20 * 1000)
-u8 currentModeStep = 0;
-u8 NUM_MODE_STEPS = 1; // calculated in setup()
+u16 framesThisMode = 0;
 
 #include "mode_Snakes.h"
 #define MODE_SNAKES 0
@@ -21,6 +19,10 @@ u8 MODE_STEPS[] = {
 	MODE_SNAKES,
 	NUM_MODES // array terminator
 };
+
+#define MS_PER_MODE_STEP (20 * 1000)
+u8 currentModeStep = 0;
+u8 NUM_MODE_STEPS = 1; // calculated in setup()
 
 void modes_setup() {
 	while (MODE_STEPS[NUM_MODE_STEPS] < NUM_MODES) {
@@ -45,6 +47,7 @@ void modes_loop() {
 				break;
 		}
 		lastMode = currentMode;
+		framesThisMode = 0;
 	}
 
 	switch (currentMode) {
@@ -57,5 +60,9 @@ void modes_loop() {
 		case MODE_SPARKLES:
 			mode_Sparkles_loop();
 			break;
+	}
+
+	if (framesThisMode < 65535) {
+		framesThisMode++;
 	}
 }
