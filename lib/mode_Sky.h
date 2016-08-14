@@ -12,6 +12,10 @@ void mode_Sky_setup() {
 	// nothing to do
 }
 
+void mode_Sky_activate() {
+	// nothing to do
+}
+
 void mode_Sky_loop() {
 	// Shifting between green/blue/white
 	for (u16 i = 0; i < NUM_LEDS; i++) {

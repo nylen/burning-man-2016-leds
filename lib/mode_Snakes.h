@@ -10,6 +10,10 @@ void mode_Snakes_setup() {
 	}
 }
 
+void mode_Snakes_activate() {
+	// nothing to do
+}
+
 void mode_Snakes_loop() {
 	setAll(CRGB::Black);
 
