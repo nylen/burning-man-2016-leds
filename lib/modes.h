@@ -1,4 +1,4 @@
-#define MS_PER_MODE_STEP (10 /* * 60 */ * 1000)
+#define MS_PER_MODE_STEP (20 * 1000)
 u8 currentModeStep = 0;
 u8 NUM_MODE_STEPS = 1; // calculated in setup()
 
@@ -15,9 +15,9 @@ u8 currentMode = NUM_MODES;
 u8 lastMode = NUM_MODES;
 
 u8 MODE_STEPS[] = {
-	MODE_SKY, MODE_SKY,
+	MODE_SKY,
 	MODE_SPARKLES,
-	MODE_SKY, MODE_SKY,
+	MODE_SKY,
 	MODE_SNAKES,
 	NUM_MODES // array terminator
 };
