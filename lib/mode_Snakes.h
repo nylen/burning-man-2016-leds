@@ -33,7 +33,8 @@ void mode_Snakes_loop() {
 		}
 	}
 
-	if (random8() < 10) {
+	u8 threshold = min(framesThisMode, 160) / 16;
+	if (random8() < threshold) {
 		for (u8 i = 0; i < NUM_SNAKES; i++) {
 			if (snakePositions[i] == NUM_LEDS) {
 				if (minSnakePosition > SNAKE_LENGTH + 5) {
