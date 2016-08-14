@@ -5,13 +5,14 @@ u8 snakeHues[NUM_SNAKES];
 u16 snakePositions[NUM_SNAKES];
 
 void mode_Snakes_setup() {
-	for (u8 i = 0; i < NUM_SNAKES; i++) {
-		snakePositions[i] = NUM_LEDS;
-	}
+	// nothing to do
 }
 
 void mode_Snakes_activate() {
-	// nothing to do
+	// Restart the sequence with black each time
+	for (u8 i = 0; i < NUM_SNAKES; i++) {
+		snakePositions[i] = NUM_LEDS;
+	}
 }
 
 void mode_Snakes_loop() {
