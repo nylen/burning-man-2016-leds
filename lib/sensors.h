@@ -7,16 +7,36 @@ u8 hits[NUM_SENSORS];
 u16 hitCenters[NUM_SENSORS];
 u16 sensorValues[NUM_SENSORS];
 
+u8 sensorConfiguration = 0;
+
 #define ANIMATION_DISTANCE 15
 
 void sensors_setup() {
-	hitCenters[0] = 25;
-	hitCenters[1] = 75;
-	hitCenters[2] = 125;
-	// bit of a wiring mixup here...
-	hitCenters[3] = 275;
-	hitCenters[4] = 225;
-	hitCenters[5] = 175;
+	EEPROM.get(ADDRESS_SENSOR_CONFIG, sensorConfiguration);
+
+	switch (sensorConfiguration) {
+		case 1:
+			hitCenters[0] = 25;
+			hitCenters[1] = 75;
+			hitCenters[2] = 125;
+			// bit of a wiring mixup here...
+			hitCenters[3] = 275;
+			hitCenters[4] = 225;
+			hitCenters[5] = 175;
+			break;
+		case 2:
+			hitCenters[0] = 25;
+			hitCenters[1] = 75;
+			hitCenters[2] = 125;
+			hitCenters[3] = 175;
+			hitCenters[4] = 225;
+			hitCenters[5] = 275;
+			break;
+		default:
+			sensorConfiguration = 0;
+			break;
+	}
+
 	for (u8 h = 0; h < NUM_SENSORS; h++) {
 		hits[h] = 0;
 		sensorValues[h] = SENSOR_THRESHOLD + 100;
@@ -24,6 +44,10 @@ void sensors_setup() {
 }
 
 void sensors_loop(u16 frameMs) {
+	if (!sensorConfiguration) {
+		return;
+	}
+
 	// Try to keep each animation step the same length regardless of the
 	// current frame length
 	u8 framesPerStep = max(32 / frameMs, 1);
@@ -106,4 +130,19 @@ void sensors_loop(u16 frameMs) {
 		}
 		sensorValues[h] = sensorValues[h] * 3 / 4 + value / 4;
 	}
+}
+
+void command_setSensorConfiguration(bool hasValue, s16 value) {
+	if (hasValue) {
+		sensorConfiguration = (u8)value;
+
+		EEPROM.put(ADDRESS_SENSOR_CONFIG, sensorConfiguration);
+		
+		// Rerun the initialization routine to set the correct sensor positions
+		sensors_setup();
+	}
+
+	Serial.print("sensor config ");
+	Serial.print(sensorConfiguration);
+	Serial.println();
 }

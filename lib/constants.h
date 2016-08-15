@@ -26,3 +26,6 @@ CRGB orange = CRGB(225,  50,   0);
 #define ADDRESS_MINUTES_2  6
 // ...
 #define ADDRESS_MINUTES_3  8
+
+// Sensor configuration (0 = none)
+#define ADDRESS_SENSOR_CONFIG  10

@@ -1,3 +1,4 @@
+#include <EEPROM.h>
 #include <FastLED.h>
 
 #define PIN_LEDS_0 2

@@ -12,6 +12,10 @@ void commands_loop() {
 		case '+':
 			commandPtr = &command_setDrift;
 			break;
+		case 'S':
+		case 's':
+			commandPtr = &command_setSensorConfiguration;
+			break;
 	}
 	if (!commandPtr) {
 		return;

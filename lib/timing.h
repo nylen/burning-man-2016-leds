@@ -1,5 +1,3 @@
-#include <EEPROM.h>
-
 u16 t = 0;
 u32 ms = 0;
 u16 lastMinute = 0;
