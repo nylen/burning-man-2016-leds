@@ -15,7 +15,7 @@ void mode_Snakes_activate() {
 	}
 }
 
-void mode_Snakes_loop() {
+u16 mode_Snakes_loop() {
 	setAll(CRGB::Black);
 
 	u16 minSnakePosition = NUM_LEDS;
@@ -47,5 +47,5 @@ void mode_Snakes_loop() {
 		}
 	}
 
-	frame(8);
+	return 8;
 }

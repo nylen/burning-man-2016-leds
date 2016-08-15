@@ -6,7 +6,7 @@ void mode_Sky_activate() {
 	// nothing to do
 }
 
-void mode_Sky_loop() {
+u16 mode_Sky_loop() {
 	if (framesThisMode < 64) {
 		FastLED.setBrightness(framesThisMode * 4);
 	} else if (framesThisMode == 64) {
@@ -47,5 +47,5 @@ void mode_Sky_loop() {
 		}
 	}
 
-	frame(15);
+	return 15;
 }

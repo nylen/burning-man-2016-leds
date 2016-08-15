@@ -30,7 +30,7 @@ void modes_setup() {
 	}
 }
 
-void modes_loop() {
+u16 modes_loop() {
 	currentModeStep = (ms / MS_PER_MODE_STEP) % NUM_MODE_STEPS;
 
 	currentMode = MODE_STEPS[currentModeStep];
@@ -50,19 +50,22 @@ void modes_loop() {
 		framesThisMode = 0;
 	}
 
+	u16 frameMs = 0;
 	switch (currentMode) {
 		case MODE_SNAKES:
-			mode_Snakes_loop();
+			frameMs = mode_Snakes_loop();
 			break;
 		case MODE_SKY:
-			mode_Sky_loop();
+			frameMs = mode_Sky_loop();
 			break;
 		case MODE_SPARKLES:
-			mode_Sparkles_loop();
+			frameMs = mode_Sparkles_loop();
 			break;
 	}
 
 	if (framesThisMode < 65535) {
 		framesThisMode++;
 	}
+
+	return frameMs;
 }

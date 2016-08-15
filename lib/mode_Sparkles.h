@@ -24,7 +24,7 @@ void mode_Sparkles_activate() {
 	}
 }
 
-void mode_Sparkles_loop() {
+u16 mode_Sparkles_loop() {
 	setAll(CRGB::Black);
 
 	for (u8 i = 0; i < NUM_SPARKLES; i++) {
@@ -103,5 +103,5 @@ void mode_Sparkles_loop() {
 		}
 	}
 
-	frame(20);
+	return 20;
 }

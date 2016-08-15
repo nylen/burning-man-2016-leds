@@ -54,5 +54,7 @@ void setup() {
 
 void loop() {
   timing_loop();
-  modes_loop();
+  u16 frameMs = modes_loop();
+
+  frame(frameMs);
 }
