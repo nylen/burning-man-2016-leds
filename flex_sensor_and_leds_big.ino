@@ -26,6 +26,7 @@ u8 randOffset = 0;
 #include "lib/colors.h"
 #include "lib/graphics.h"
 #include "lib/init.h"
+#include "lib/sensors.h"
 #include "lib/timing.h"
 
 #include "lib/modes.h"
@@ -42,6 +43,7 @@ void setup() {
   random16_add_entropy(analogRead(A5));
   randOffset = random8();
 
+  sensors_setup();
   timing_setup();
 
   modes_setup();
@@ -56,5 +58,6 @@ void loop() {
   timing_loop();
   u16 frameMs = modes_loop();
 
+  sensors_loop(frameMs);
   frame(frameMs);
 }
