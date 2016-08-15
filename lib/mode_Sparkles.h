@@ -2,12 +2,12 @@
 u16 sparklePositions[NUM_SPARKLES];
 u8 sparkleFrames[NUM_SPARKLES];
 
-#define SPARKLE_FRAMES 50
+#define SPARKLE_FRAMES 80
 
 // Animation transition points by frame index
-#define SPARKLE_END_FADE        8
-#define SPARKLE_END_RAINBOW     42
-#define SPARKLE_END_DESATURATE  46
+#define SPARKLE_END_FADE        30
+#define SPARKLE_END_RAINBOW     72
+#define SPARKLE_END_DESATURATE  76
 #define SPARKLE_END_EXPLODE     SPARKLE_FRAMES
 
 #define SPARKLE_FRAMES_DESATURATE (SPARKLE_END_DESATURATE - SPARKLE_END_RAINBOW)
@@ -93,7 +93,7 @@ u16 mode_Sparkles_loop() {
 		}
 	}
 
-	if (random8() < 32) {
+	if (random8() < 64) {
 		for (u8 i = 0; i < NUM_SPARKLES; i++) {
 			if (sparklePositions[i] == NUM_LEDS) {
 				sparklePositions[i] = random16() % NUM_LEDS;
