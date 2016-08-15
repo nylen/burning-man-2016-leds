@@ -31,6 +31,8 @@ u8 randOffset = 0;
 
 #include "lib/modes.h"
 
+#include "lib/commands.h"
+
 void setup() {
   FastLED.addLeds<WS2812_STRIP, PIN_LEDS_0>(leds0, NUM_LEDS_PER_STRIP);
   FastLED.addLeds<WS2812_STRIP, PIN_LEDS_1>(leds1, NUM_LEDS_PER_STRIP);
@@ -55,6 +57,7 @@ void setup() {
 }
 
 void loop() {
+  commands_loop();
   timing_loop();
   u16 frameMs = modes_loop();
 

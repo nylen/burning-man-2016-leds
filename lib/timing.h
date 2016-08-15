@@ -40,24 +40,9 @@ void timing_loop() {
 		}
 		lastMinute = currentMinute;
 	}
+}
 
-	s16 serialByte = Serial.read();
-	if (serialByte != '-' && serialByte != '+') {
-		return;
-	}
-
-	delayMicroseconds(80); // wait for next byte
-
-	bool isNegative = (serialByte == '-');
-	u16 drift = 0;
-	while ((serialByte = Serial.read()) > -1) {
-		if (serialByte < '0' || serialByte > '9') {
-			break;
-		}
-		drift = drift * 10 + serialByte - '0';
-		delayMicroseconds(80);
-	}
-
+void command_setDrift(bool hasValue, s16 drift) {
 	u16 previousBootMinutes;
 
 	EEPROM.get(ADDRESS_MINUTES_3, previousBootMinutes);
@@ -83,8 +68,8 @@ void timing_loop() {
 	Serial.print(driftMsPerHour);
 	Serial.print("ms/hr");
 
-	if (drift > 0) {
-		driftMsPerHour = isNegative ? -drift : drift;
+	if (hasValue) {
+		driftMsPerHour = drift;
 		EEPROM.put(ADDRESS_DRIFT, driftMsPerHour);
 	}
 
