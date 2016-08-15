@@ -23,7 +23,7 @@ template<uint8_t DATA_PIN> class WS2812_STRIP : public WS2812Controller800Khz<DA
 // For differentiating effects between boards
 u8 randOffset = 0;
 
-#include "lib/colors.h"
+#include "lib/constants.h"
 #include "lib/graphics.h"
 #include "lib/init.h"
 #include "lib/sensors.h"

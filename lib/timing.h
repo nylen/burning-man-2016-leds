@@ -6,17 +6,6 @@ u16 lastMinute = 0;
 u16 currentMinute = 0;
 s16 driftMsPerHour = 0;
 
-// Drift for this chip, ms per hour
-#define ADDRESS_DRIFT      0
-// Current runtime
-#define ADDRESS_MINUTES_0  2
-// Last runtime
-#define ADDRESS_MINUTES_1  4
-// Runtime before last
-#define ADDRESS_MINUTES_2  6
-// ...
-#define ADDRESS_MINUTES_3  8
-
 void timing_setup() {
 	EEPROM.get(ADDRESS_DRIFT, driftMsPerHour);
 
