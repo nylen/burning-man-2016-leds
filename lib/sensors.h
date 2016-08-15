@@ -24,20 +24,25 @@ void sensors_setup() {
 }
 
 void sensors_loop(u16 frameMs) {
+	// Try to keep each animation step the same length regardless of the
+	// current frame length
+	u8 framesPerStep = max(32 / frameMs, 1);
+
 	// Perform hit animations
 	for (u8 h = 0; h < NUM_SENSORS; h++) {
 		if (hits[h] > 0) {
-			u8 extent = min(hits[h], ANIMATION_DISTANCE);
+			u8 hitStep = hits[h] / framesPerStep;
+			u8 extent = min(hitStep, ANIMATION_DISTANCE);
 			for (u8 j = 0; j <= extent; j++) {
-				if (j + ANIMATION_DISTANCE < hits[h]) {
+				if (j + ANIMATION_DISTANCE < hitStep) {
 					// Skip the inside of the animation
 					continue;
 				}
 				u8 alpha;
 				CRGB hitColor;
-				if (j + ANIMATION_DISTANCE - 5 < hits[h]) {
+				if (j + ANIMATION_DISTANCE - 5 < hitStep) {
 					// 5 inner pixels of the receding edge
-					alpha = (j + ANIMATION_DISTANCE - hits[h]) * 40 + 55;
+					alpha = (j + ANIMATION_DISTANCE - hitStep) * 40 + 55;
 					hitColor = blend(yellow, orange, alpha);
 				} else if (j == extent) {
 					// Outer edge
@@ -76,7 +81,7 @@ void sensors_loop(u16 frameMs) {
 				}
 			}
 			//delay(50); // debugging the animation
-			if (++hits[h] == ANIMATION_DISTANCE * 2) {
+			if (++hits[h] == framesPerStep * ANIMATION_DISTANCE * 2) {
 				hits[h] = 0;
 			}
 		}
@@ -95,7 +100,7 @@ void sensors_loop(u16 frameMs) {
 			if (value > sensorValues[h] + SENSOR_THRESHOLD) {
 				value = analogRead(PIN_FLEX_SENSOR_0 + h);
 				if (value > sensorValues[h] + SENSOR_THRESHOLD) {
-					hits[h] = 1;
+					hits[h] = framesPerStep;
 				}
 			}
 		}
