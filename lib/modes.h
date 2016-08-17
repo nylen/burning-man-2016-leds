@@ -6,8 +6,10 @@ u16 framesThisMode = 0;
 #define MODE_SKY 1
 #include "mode_Sparkles.h"
 #define MODE_SPARKLES 2
+#include "mode_Rainbow.h"
+#define MODE_RAINBOW 3
 
-#define NUM_MODES 3
+#define NUM_MODES 4
 
 u8 currentMode = NUM_MODES;
 u8 lastMode = NUM_MODES;
@@ -15,8 +17,8 @@ u8 lastMode = NUM_MODES;
 u8 MODE_STEPS[] = {
 	MODE_SKY,
 	MODE_SPARKLES,
-	MODE_SKY,
 	MODE_SNAKES,
+	MODE_RAINBOW,
 	NUM_MODES // array terminator
 };
 
@@ -28,6 +30,11 @@ void modes_setup() {
 	while (MODE_STEPS[NUM_MODE_STEPS] < NUM_MODES) {
 		NUM_MODE_STEPS++;
 	}
+
+	mode_Snakes_setup();
+	mode_Sky_setup();
+	mode_Sparkles_setup();
+	mode_Rainbow_setup();
 }
 
 u16 modes_loop() {
@@ -45,6 +52,9 @@ u16 modes_loop() {
 			case MODE_SPARKLES:
 				mode_Sparkles_activate();
 				break;
+			case MODE_RAINBOW:
+				mode_Rainbow_activate();
+				break;
 		}
 		lastMode = currentMode;
 		framesThisMode = 0;
@@ -60,6 +70,9 @@ u16 modes_loop() {
 			break;
 		case MODE_SPARKLES:
 			frameMs = mode_Sparkles_loop();
+			break;
+		case MODE_RAINBOW:
+			frameMs = mode_Rainbow_loop();
 			break;
 	}
 

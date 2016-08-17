@@ -50,8 +50,6 @@ void setup() {
   timing_setup();
 
   modes_setup();
-  mode_Snakes_setup();
-  mode_Sky_setup();
 
   // Short graphics sequence for testing
   init_runSequence();
