@@ -9,16 +9,20 @@ void mode_Rainbow_setup() {
 }
 
 void mode_Rainbow_activate() {
-	h_a = random8() % 5 + 1;
-	h_b = random8() % 4 + 1;
-	h_c = random8() % 4 + 1;
-	h_d = random8() % 8 + 1;
-	h_e = random8() % 6 + 1;
+	// If several of the hue coefficients are large, the colors change too
+	// quickly to look really nice
+	do {
+		h_a = random8() % 3 + 1;
+		h_b = random8() % 2 + 1;
+		h_c = random8() % 2 + 1;
+		h_d = random8() % 4 + 1;
+		h_e = random8() % 3 + 1;
+	} while (h_a + h_b + h_c + h_d + h_e > 10);
 
 	v_a = random8() % 3 + 1;
 	v_b = random8() % 5 + 1;
 	v_c = random8() % 4 + 1;
-	v_d = random8() % 5 + 1;
+	v_d = random8() % 3 + 1;
 }
 
 u16 mode_Rainbow_loop() {
@@ -48,5 +52,5 @@ u16 mode_Rainbow_loop() {
 		setLed(i, CHSV(h, s, v));
 	}
 
-	return 20;
+	return 15 * (h_b + h_c);
 }
