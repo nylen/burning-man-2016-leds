@@ -22,7 +22,7 @@ u8 MODE_STEPS[] = {
 	NUM_MODES // array terminator
 };
 
-#define MS_PER_MODE_STEP (20 * 1000)
+#define MS_PER_MODE_STEP ((u32)2 * 60 * 1000)
 u8 currentModeStep = 0;
 u8 NUM_MODE_STEPS = 1; // calculated in setup()
 
