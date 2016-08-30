@@ -8,10 +8,10 @@ void init_runSequence() {
 	setAll(white);
 	for (u8 i = 0; i < 6; i++) {
 		CRGB color = CHSV(i * (255 / 7), 255, 255);
-		setLed(i, color);
+		setLed(i + MIN_LED_INDEX, color);
 		setLed(NUM_LEDS_PER_STRIP - 1 - i, color);
 		setLed(NUM_LEDS_PER_STRIP + i, color);
-		setLed(NUM_LEDS - 1 - i, color);
+		setLed(MAX_LED_INDEX - i, color);
 	}
 	for (u8 initFrame = 0; initFrame < INIT_FRAMES; initFrame++) {
 		for (u8 i = 10; i < 50; i++) {
@@ -24,5 +24,8 @@ void init_runSequence() {
 		frame(0);
 		delay(INIT_MS / INIT_FRAMES);
 	}
-	setAll(CRGB::Black);
+	for (u8 i = 0; i < NUM_LEDS_PER_STRIP; i++) {
+		leds0[i] = CRGB::Black;
+		leds1[i] = CRGB::Black;
+	}
 }

@@ -23,6 +23,8 @@ void sensors_setup() {
 			hitCenters[3] = 275;
 			hitCenters[4] = 225;
 			hitCenters[5] = 175;
+			MIN_LED_INDEX = 16;
+			MAX_LED_INDEX = NUM_LEDS - 1 - 18;
 			break;
 		case 2:
 			hitCenters[0] = 25;
@@ -31,6 +33,8 @@ void sensors_setup() {
 			hitCenters[3] = 175;
 			hitCenters[4] = 225;
 			hitCenters[5] = 275;
+			MIN_LED_INDEX = 17;
+			MAX_LED_INDEX = NUM_LEDS - 1 - 17;
 			break;
 		default:
 			sensorConfiguration = 0;

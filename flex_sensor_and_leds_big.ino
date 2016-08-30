@@ -19,6 +19,9 @@ CRGB leds1[NUM_LEDS_PER_STRIP];
 #define u32 uint32_t
 #define s32 int32_t
 
+u16 MIN_LED_INDEX = 0;
+u16 MAX_LED_INDEX = NUM_LEDS - 1;
+
 template<uint8_t DATA_PIN> class WS2812_STRIP : public WS2812Controller800Khz<DATA_PIN, GRB> {};
 
 // For differentiating effects between boards

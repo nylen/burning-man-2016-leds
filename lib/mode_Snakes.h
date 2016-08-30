@@ -38,8 +38,8 @@ u16 mode_Snakes_loop() {
 		for (u8 i = 0; i < NUM_SNAKES; i++) {
 			if (snakePositions[i] == NUM_LEDS) {
 				if (minSnakePosition > SNAKE_LENGTH + 5) {
-					snakePositions[i] = 0;
-					minSnakePosition = 0;
+					snakePositions[i] = MIN_LED_INDEX;
+					minSnakePosition = MIN_LED_INDEX;
 					snakeHues[i] = random8();
 					break;
 				}
