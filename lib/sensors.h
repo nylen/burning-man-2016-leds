@@ -16,23 +16,24 @@ void sensors_setup() {
 
 	switch (sensorConfiguration) {
 		case 1:
-			hitCenters[0] = 25;
-			hitCenters[1] = 75;
-			hitCenters[2] = 125;
+			hitCenters[0] = 42;
+			hitCenters[1] = 74;
+			hitCenters[2] = 119;
+			hitCenters[3] = 165;
 			// bit of a wiring mixup here...
-			hitCenters[3] = 275;
-			hitCenters[4] = 225;
-			hitCenters[5] = 175;
+			hitCenters[4] = 256;
+			hitCenters[5] = 212;
 			MIN_LED_INDEX = 16;
 			MAX_LED_INDEX = NUM_LEDS - 1 - 18;
 			break;
 		case 2:
-			hitCenters[0] = 25;
+			hitCenters[0] = 44;
 			hitCenters[1] = 75;
-			hitCenters[2] = 125;
-			hitCenters[3] = 175;
-			hitCenters[4] = 225;
-			hitCenters[5] = 275;
+			hitCenters[2] = 112;
+			// ...and here too
+			hitCenters[3] = 259;
+			hitCenters[4] = 206;
+			hitCenters[5] = 165;
 			MIN_LED_INDEX = 17;
 			MAX_LED_INDEX = NUM_LEDS - 1 - 17;
 			break;
