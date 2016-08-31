@@ -55,13 +55,18 @@ void sensors_loop(u16 frameMs) {
 
 	// Try to keep each animation step the same length regardless of the
 	// current frame length
-	u8 framesPerStep = max(32 / frameMs, 1);
+	u8 framesPerStep = max(40 / frameMs, 1);
 
 	// Perform hit animations
 	for (u8 h = 0; h < NUM_SENSORS; h++) {
 		if (hits[h] > 0) {
 			u8 hitStep = hits[h] / framesPerStep;
-			u8 extent = min(hitStep, ANIMATION_DISTANCE);
+			u8 extent;
+			if (hitStep < 10) {
+				extent = (10 - hitStep) * 8;
+			} else {
+				extent = min(hitStep, ANIMATION_DISTANCE);
+			}
 			for (u8 j = 0; j <= extent; j++) {
 				if (j + ANIMATION_DISTANCE < hitStep) {
 					// Skip the inside of the animation
