@@ -8,21 +8,34 @@ void mode_Rainbow_setup() {
 	// nothing to do
 }
 
+// Separate RNG for rainbow patterns so that the different LED strips remain
+// synchronized.  Lifted from FastLED lib8tion code.
+
+uint16_t mode_Rainbow_seed = 33;
+
+uint8_t mode_Rainbow_random8() {
+    mode_Rainbow_seed = (mode_Rainbow_seed * (u16)2053) + (u16)13849;
+    // return the sum of the high and low bytes, for better
+    //  mixing and non-sequential correlation
+    return (uint8_t)(((uint8_t)(mode_Rainbow_seed & 0xFF)) +
+                     ((uint8_t)(mode_Rainbow_seed >> 8)));
+}
+
 void mode_Rainbow_activate() {
 	// If several of the hue coefficients are large, the colors change too
 	// quickly to look really nice
 	do {
-		h_a = random8() % 3 + 1;
-		h_b = random8() % 2 + 1;
-		h_c = random8() % 2 + 1;
-		h_d = random8() % 4 + 1;
-		h_e = random8() % 3 + 1;
+		h_a = mode_Rainbow_random8() % 3 + 1;
+		h_b = mode_Rainbow_random8() % 2 + 1;
+		h_c = mode_Rainbow_random8() % 2 + 1;
+		h_d = mode_Rainbow_random8() % 4 + 1;
+		h_e = mode_Rainbow_random8() % 2 + 1;
 	} while (h_a + h_b + h_c + h_d + h_e > 10);
 
-	v_a = random8() % 3 + 1;
-	v_b = random8() % 5 + 1;
-	v_c = random8() % 4 + 1;
-	v_d = random8() % 3 + 1;
+	v_a = mode_Rainbow_random8() % 3 + 1;
+	v_b = mode_Rainbow_random8() % 5 + 1;
+	v_c = mode_Rainbow_random8() % 4 + 1;
+	v_d = mode_Rainbow_random8() % 3 + 1;
 }
 
 u16 mode_Rainbow_loop() {
